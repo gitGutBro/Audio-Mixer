@@ -8,16 +8,13 @@ public class AudioSlider : MonoBehaviour
     private const int VolumeMultiplier = 40;
 
     [SerializeField] private Muter _muter;
-    [SerializeField] AudioMixerGroup _mixerGroup;
+    [SerializeField] private AudioMixerGroup _mixerGroup;
 
     private Slider _slider;
-    private float _currentSound;
+    private float _currentVolume;
 
     private void Awake() =>
         Init();
-
-    private void Start() =>
-        ChangeVolume(_currentSound);
 
     private void OnEnable()
     {
@@ -25,6 +22,9 @@ public class AudioSlider : MonoBehaviour
         _muter.SoundOff += SoundOff;
         _muter.SoundOn += SoundOn;
     }
+
+    private void Start() =>
+        ChangeVolume(_currentVolume);
 
     private void OnDisable()
     {
@@ -41,15 +41,15 @@ public class AudioSlider : MonoBehaviour
 
     private void SoundOff()
     {
-        _currentSound = _slider.value;
+        _currentVolume = _slider.value;
         ChangeSlider(_slider.minValue);
         _slider.interactable = false;
     }
 
     private void SoundOn() 
     {
-        ChangeSlider(_currentSound);
-        _slider.value = _currentSound;
+        ChangeSlider(_currentVolume);
+        _slider.value = _currentVolume;
         _slider.interactable = true;
     }
 
@@ -57,6 +57,6 @@ public class AudioSlider : MonoBehaviour
     {
         _slider = GetComponent<Slider>();
 
-        _currentSound = _slider.value;
+        _currentVolume = _slider.value;
     }
 }

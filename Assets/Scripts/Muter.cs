@@ -3,14 +3,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Button))]
 public class Muter : MonoBehaviour
 {
     private const string Off = "O";
     private const string On = "X";
 
-    private Button _muteButton;
-    private TextMeshProUGUI _sign;
+    [SerializeField] private TextMeshProUGUI _sign;
 
+    private Button _muteButton;
     private bool _isMuted;
 
     public event Action SoundOff;
@@ -44,7 +45,6 @@ public class Muter : MonoBehaviour
     private void Init()
     {
         _muteButton = GetComponent<Button>();
-        _sign = GetComponentInChildren<TextMeshProUGUI>();
 
         _isMuted = false;
         _sign.text = On;

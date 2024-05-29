@@ -31,12 +31,12 @@ public class Muter : MonoBehaviour
         _isMuted = !_isMuted;
 
         if (_isMuted)
-            SwitchingMuteState(SoundOff, Off);
+            ToSwitchMuteState(SoundOff, Off);
         else
-            SwitchingMuteState(SoundOn, On);
+            ToSwitchMuteState(SoundOn, On);
     }
 
-    private void SwitchingMuteState(Action action, string sign)
+    private void ToSwitchMuteState(Action action, string sign)
     {
         action?.Invoke();
         _sign.text = sign;
